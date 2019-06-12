@@ -5,7 +5,10 @@ const initialState = {
     searchValue: '',
     sex: '',
     filteredGallery: [],
-    login: ''
+    userData: [],
+    postData: [],
+    logined: false,
+    isAdmin: false,
 }
 
 export default function galleryReducer (state = initialState, action){
@@ -23,7 +26,32 @@ export default function galleryReducer (state = initialState, action){
         case actionTypes.LOGIN: 
             return{
                 ...state, 
-                login: action.login
+                loginFormData: action.loginFormData
+            }
+        case actionTypes.GET_USER_DATA: 
+            return{
+                ...state, 
+                userData: action.userData
+            }
+        case actionTypes.GET_POST_DATA: 
+            return{
+                ...state, 
+                postData: action.postData
+            }
+        case actionTypes.LOGINED: 
+            return{
+                ...state, 
+                logined: true
+            }
+        case actionTypes.LOGOUT: 
+            return{
+                ...state, 
+                logined: false
+            }
+        case actionTypes.IS_ADMIN: 
+            return{
+                ...state, 
+                isAdmin: true
             }
         default:
             return state;

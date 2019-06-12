@@ -17,17 +17,17 @@ const styles = theme => ({
     }
 });
 
-const Gallery = ({ classes, pathName, getSearchFieldValue, searchValue }) => {
+const Gallery = ({ classes, pathName, getSearchFieldValue, searchValue, isLogin, isAdmin }) => {
     const path = pathName.split('/')[1]
     const filteredGallery = gallery.filter( el => el.title.includes(searchValue))
     console.log(searchValue)
     return(
         <div>
-            <Menu path={path} />
+            <Menu isAdmin={isAdmin} isLogin={isLogin} path={path} />
             <div className={classes.galleryContainer} >
                 <SearchForm getValue={getSearchFieldValue} /> 
                 <ul className='gallery'>
-                    {filteredGallery.map( el => <GalleryItem title={el.title} galleryImg={el.galleryImg} description={el.description} key={el.id} />)}
+                    {filteredGallery.map( el => <GalleryItem isAdmin={isAdmin} title={el.title} galleryImg={el.galleryImg} description={el.description} key={el.id} />)}
                 </ul>
             </div>
 
@@ -40,7 +40,9 @@ const mapDispatchToProps = {
 }
   
   const mapStateToProps = (state) => ({
-    searchValue: state.ui.searchValue
+    searchValue: state.ui.searchValue,
+    isLogin: state.ui.logined,
+    isAdmin: state.ui.isAdmin,
   });
 
 Gallery.propTypes = {

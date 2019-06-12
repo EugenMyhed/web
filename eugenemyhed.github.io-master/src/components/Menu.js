@@ -1,11 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import '../scss/_menu.scss'
 import logo from '../img/logo2.png'
+import { logOut } from '../actions/actions'
 
 const styles = () => ({
    link: {
@@ -23,7 +26,7 @@ const styles = () => ({
 });
 
 
-const Menu = ({ classes, path}) => (
+const Menu = ({ classes, path, isLogin, logOut, isAdmin}) => (
    <header className="mainContainer">
       <Link  to="/">
          <img src={logo} alt="logo" />
@@ -46,17 +49,25 @@ const Menu = ({ classes, path}) => (
                   path === 'gallery' ? classes.selectedPage : classes.unSelectedPage}`
                }>Gallery</Typography>
       </Link>
-      <Link to="/blog">
-         <Typography component="h2" variant="headline" className={`${classes.link} ${  
-                  path === 'blog' ? classes.selectedPage : classes.unSelectedPage}`
-               }>Blog</Typography>
-      </Link>
+      {
+         isAdmin ? (
+         <Link to="/admin">
+            <Typography component="h2" variant="headline" className={`${classes.link} ${  
+                  path === 'admin' ? classes.selectedPage : classes.unSelectedPage}`
+               }>Admin
+            </Typography>
+         </Link>) : null
+      }
+      {
+         !isLogin ?(
       <Link to="/login">
          <Typography component="h2" variant="headline" className={`${classes.link} ${  
                   path === 'login' ? classes.selectedPage : classes.unSelectedPage}`
                }
             >Login</Typography>
-      </Link>
+      </Link>) : (
+         <Button onClick={() => logOut()} variant="contained" color="secondary" className={classes.button}>Log Out</Button>)
+      }
       </div>
    </header>
 
@@ -67,7 +78,12 @@ Menu.propTypes = {
    classes: PropTypes.shape({}).isRequired,
 };
 
+const mapDispatchToProps = {
+   logOut
+}
+
 
 export default compose(
-   withStyles(styles)
+   withStyles(styles),
+   connect(null, mapDispatchToProps)
 )(Menu);

@@ -1,0 +1,17 @@
+.number{
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.offerWrapper{
+    display: flex;
+    flex-direction: row
+}
+
+.infoContainer{
+    margin-left: 10px;
+    width: 300px;
+}

@@ -1,0 +1,13 @@
+.wrapperHomePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.postContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+

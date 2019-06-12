@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextFormField from './forms/TextFormField';
 
@@ -29,44 +28,38 @@ const styles = theme => ({
     },
 });
 
-const LoginForm = ({ handleSubmit, classes }) => (
+const AdminForm = ({ handleSubmit, classes }) => (
     <form onSubmit={handleSubmit} className={classes.loginForm}>
         <Typography variant="h4" gutterBottom>
             Login
         </Typography>
         <Field
-            name="email"
+            name="title"
             component={TextFormField}
-            type="email"
-            label="Email"
-            placeholder="Type email"
+            type="text"
+            label="Title"
+            placeholder="Type title"
             className={classes.field}
         />
         <Field
-            name="password"
+            name="description"
             component={TextFormField}
-            type="password"
-            label="Password"
-            placeholder="Type password" 
+            type="text"
+            label="Description"
+            placeholder="Type description" 
             className={classes.field}
         />
         <Button className={classes.submitButton} type="submit" variant="contained" color="primary">
-            Login
+            Create post
         </Button>
 
-        <Button className={classes.btnLink} component={Link} to="/signup">
-            Create account
-        </Button>
-
-        <Button className={classes.btnLink} component={Link} to="/password_reset">
-            Forgot password
-        </Button>
+       
     </form>
 );
 
 export default compose(
     reduxForm({
-        form: 'loginForm',
+        form: 'adminForm',
     }),
     withStyles(styles),
-)(LoginForm);
+)(AdminForm);
